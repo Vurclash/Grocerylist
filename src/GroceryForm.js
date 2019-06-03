@@ -1,7 +1,14 @@
 import React from 'react';
 
 class GroceryForm extends React.Component{
-  state = { name: '' }
+  constructor(props){
+    super(props)
+
+    this.state = { name: "", };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit =       this.handleSubmit.bind(this);
+  }
+
 
   handleChange = (e) => {
     this.setState({ name: e.target.value });

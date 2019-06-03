@@ -19,7 +19,7 @@ class App extends React.Component{
 
   addItem = (name) => {
     const { groceries } = this.state;
-    const groceries = { name, id: this.getUniqId() , complete: false }
+    const grocers = { name, id: this.getUniqId() , complete: false }
     this.setState({ groceries: [groceries, ...groceries] });
   }
 
@@ -37,6 +37,17 @@ class App extends React.Component{
     })
   }
 
+  visibleItems = () => {
+    const { groceries, filter } = this.state;
+    switch(filter){
+      case 'Active':
+        return groceries.filter(t => !t.complete )
+      case 'Complete':
+        return groceries.filter( t=> t.complete )
+      default: 
+        return groceries;
+    }
+  }
 
 
 
@@ -46,7 +57,7 @@ class App extends React.Component{
     return(
       <div>
         <GroceryForm addItem={this.addItem} />
-        <List name="Groceries" items={groceries} groceriesClick={this.handleClick} />
+        <List name="Groceries" items={this.visibleItems()} groceryClick={this.handleClick} />
         <Footer filter={filter} setFilter={this.setFilter} />
       </div>
     );
