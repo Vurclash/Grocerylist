@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import List from './List';
+import GroceryForm from './GroceryForm' ;
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+  state = {
+    groceries: [
+      {id: 1, name: "Milk", complete: false, },
+      {id: 2, name: "Cookies", complete: false, },
+      {id: 3, name: "Naan bread", complete: false, },
+    ]
+  };
+
+  renderGroceries = () => {
+    const { groceries, } = this.state;
+    return groceries.map( todo => <li key={groceries.id}>{groceries.name}</li>
+    )
+  };
+
+  render() {
+    const { groceries } = this.state;
+
+    return(
+      <div>
+        <GroceryForm />
+        <List name="Groceries" items={groceries} />
+      </div>
+    );
+  }
 }
 
 export default App;
